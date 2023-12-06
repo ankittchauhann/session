@@ -1,0 +1,23 @@
+const loginUser = async (req, res) => {
+    // Validate the request body
+    const { error
+    } = validateAuth(req.body);
+    if (error) return res.status(400).send(error.details[
+        0
+    ].message);
+  
+    // Check if this user already exisits
+    let user = await User.findOne({ email: req.body.email
+    });
+    if (!user) return res.status(400).send("Incorrect email or password.");
+  
+    const validPassword = await bcrypt.compare(req.body.password, user.password);
+    if (!validPassword)
+      return res.status(400).send("Incorrect email or password.");
+  
+    const token = user.generateAuthToken();
+    res.send(token);
+};
+
+
+cookie = dcd45985-751b-41c8-9fa6-b6a023d34ee1
