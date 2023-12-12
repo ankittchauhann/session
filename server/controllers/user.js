@@ -110,7 +110,7 @@ const loginUser = async (req, res) => {
     httpOnly: true,
     secure: true,
     sameSite: "none",
-    maxAge: 1000 * 60 * 60, // 7 days
+    maxAge: 1000 * 60 * 60, // 1000 is 1 second, 60 is 1 minute, 60 is 1 hour, so this is 1 hour in milli
   });
   res.status(200).send(_.pick(user, ["_id", "name", "email"]));
 };
